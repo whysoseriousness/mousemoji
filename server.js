@@ -8,11 +8,15 @@ app.get('/', function(req, res){
 });
 
 app.get('/EmailForm.js', function(req, res){
-    res.sendFile(__dirname + '/EmailForm.js');    
+  res.sendFile(__dirname + '/EmailForm.js');    
 });
 
 app.get('/Chat.js', function(req, res){
-    res.sendFile(__dirname + '/Chat.js');    
+  res.sendFile(__dirname + '/Chat.js');    
+});
+
+app.get('/Mouse.js', function(req, res) {
+	res.sendFile(__dirname + '/Mouse.js');
 });
 
 // Sockets
@@ -23,6 +27,7 @@ io.on('connection', function(socket){
 
 function move(mouse){
   io.emit('move', mouse);
+  console.log(mouse);
 }
 
 function chat(message){
