@@ -1,0 +1,15 @@
+{
+  "name": "mousemoji",
+  "version": "1.0.0",
+  "description": "move your mouse and watch other people move theirs... cause why not?",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "joshua martin",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.3",
+    "socket.io": "^1.3.7"
+  }
+}
