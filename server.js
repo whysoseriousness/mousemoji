@@ -29,6 +29,6 @@ function chat(message){
   io.emit('chat', message);
 }
 
-http.listen(process.env.PORT || 1993, function(){
-	console.log('flags lifted on 1993 (80 in production)');
+http.listen(process.env.PORT || 3000, function(){
+	console.log('flags lifted on 3000 (80 in production)');
 });
