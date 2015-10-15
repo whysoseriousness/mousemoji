@@ -1,5 +1,6 @@
 var socket = io();
 var id;
+var sId;
 var emoji;
 
 var emitCount = 0;
@@ -30,7 +31,8 @@ document.onmousemove=function(e){
         x: x - 5, 
         y: y - 5, 
         uid: id,
-        emoji: emoji
+        emoji: emoji,
+        "sId" : sId
     }
 
     if ((emitCount = (emitCount + 1) % 10) == 0 )
@@ -46,7 +48,8 @@ document.addEventListener("touchmove", function(e){
         x: x, 
         y: y, 
         uid: id,
-        emoji: emoji
+        emoji: emoji,
+        "sId" : sId
     }
     if ((emitCount = (emitCount + 1) % 10) == 0)
         socket.emit('move', mouse);
@@ -57,6 +60,10 @@ socket.on('move', function(mouse){
     if (mouse.uid !== id) {
       moveMouse(mouse);
     }
+});
+
+socket.on("join", function(event) {
+  sId = event.sId;
 });
 
 window.onload=function(){

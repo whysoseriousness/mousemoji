@@ -2,6 +2,8 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+var connectedClients = [];
+
 // Routes
 app.get('/', function(req, res){
 	res.sendFile(__dirname + '/index.html');	
@@ -20,14 +22,25 @@ app.get('/Mouse.js', function(req, res) {
 });
 
 // Sockets
-io.on('connection', function(socket){
+io.on('connection', function(socket) {
+  var sId = socket.client.conn.id;
+  connectedClients.push(sId);
+
+  io.emit('join', {"sId" : sId});
+
   socket.on('move', move);
 	socket.on('chat', chat);
+  socket.on('disconnect', disconnect);
 });
 
-function move(mouse){
-  io.emit('move', mouse);
-  console.log(mouse);
+function disconnect(socket) {
+  console.log(socket);
+}
+
+function move(mouse) {
+  if (connectedClients.indexOf(mouse.sId) > -1) {
+    io.emit('move', mouse);
+  }
 }
 
 function chat(message){
